@@ -24,7 +24,7 @@ pip install -r requirements.txt
 # Run against all sample logs (EMR + Airflow)
 python main.py
 
-Analyze a Specific Log
+## Analyze a Specific Log
 
 # EMR sample
 python main.py --log sample_logs/oom_error.log
@@ -34,7 +34,7 @@ python main.py --log sample_logs/airflow_task_timeout.log
 
 
 
-How It Works
+## How It Works
 
 Failure Log (local file or S3 object)
         ↓
@@ -48,14 +48,14 @@ Match against known_issues.json
 └─────────────────────────────────┘
 
 
-Supported Sources
+## Supported Sources
 
 Source       Example S3 path
 EMR / Spark  s3://data-platform-raw-zone-emr-logs/elasticmapreduce/j-3ABCDEF12GHIJ/
 Airflow      s3://data-platform-curated-zone-logs/airflow/logs/etl_sales_curated_daily/
 
 
-Knowledge Base Format
+## Knowledge Base Format
 
 {
   "id": "af-timeout-001",
@@ -70,13 +70,13 @@ Knowledge Base Format
 }
 
 
-Sample Known Issues Included
+## Sample Known Issues Included
 
 EMR / Spark: OOM, connection refused, NullPointer, disk full, shuffle fetch, S3 SlowDown
 Airflow: task timeout, sensor timeout, upstream failed, DAG import error, metadata DB failure, S3 AccessDenied, K8s OOMKilled, missing connection
 
 
-Project Structure
+## Project Structure
 
 next-gen-incident-management/
 ├── main.py
