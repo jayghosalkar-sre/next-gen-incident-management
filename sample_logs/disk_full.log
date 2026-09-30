@@ -1,0 +1,12 @@
+25/03/15 11:30:05 ERROR NodeManager: Disk error on /mnt/yarn
+java.io.IOException: No space left on device
+	at java.io.FileOutputStream.writeBytes(Native Method)
+	at java.io.FileOutputStream.write(FileOutputStream.java:326)
+	at org.apache.hadoop.fs.RawLocalFileSystem$LocalFSFileOutputStream.write(RawLocalFileSystem.java:269)
+25/03/15 11:30:06 WARN YarnSchedulerBackend$YarnSchedulerEndpoint: Requesting driver to remove executor 5: 
+Container from a bad node: container_1742043738000_0003_01_000006 on host: ip-10-0-3-22.ec2.internal. 
+Exit status: 1. Diagnostics: No space left on device
+25/03/15 11:30:07 ERROR ApplicationMaster: Uncaught exception: 
+org.apache.spark.SparkException: Job aborted due to stage failure: 
+Task 3 in stage 1.0 failed 4 times, most recent failure: Lost task 3.3 in stage 1.0 (TID 28): 
+java.io.IOException: No space left on device
