@@ -1,0 +1,18 @@
+[2026-03-15 11:20:33,102] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_curated_sales> on 2026-03-15 11:00:00+00:00
+[2026-03-15 11:20:33,890] {base.py:73} INFO - Using connection ID 'aws_default' for task execution.
+[2026-03-15 11:20:34,201] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 1982, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/opt/airflow/dags/etl_sales_curated_daily.py", line 88, in load_curated_sales
+    s3_hook.load_file(filename=local_path, key=s3_key, bucket_name=bucket, replace=True)
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/providers/amazon/aws/hooks/s3.py", line 612, in load_file
+    client.upload_file(Filename=filename, Bucket=bucket_name, Key=key, ExtraArgs=extra_args)
+  File "/home/airflow/.local/lib/python3.11/site-packages/botocore/client.py", line 535, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/home/airflow/.local/lib/python3.11/site-packages/botocore/client.py", line 983, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (AccessDenied) when calling the PutObject operation: Access Denied
+[2026-03-15 11:20:34,305] {taskinstance.py:1403} INFO - Marking task as FAILED. dag_id=etl_sales_curated_daily, task_id=load_curated_sales
