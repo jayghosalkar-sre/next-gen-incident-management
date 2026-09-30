@@ -1,0 +1,17 @@
+[2026-03-15 06:00:02,441] {dagbag.py:540} ERROR - Failed to import: /opt/airflow/dags/etl_sales_curated_daily.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/dagbag.py", line 531, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/opt/airflow/dags/etl_sales_curated_daily.py", line 12, in <module>
+    from company.utils.transformers import SalesTransformer
+  File "/opt/airflow/dags/company/utils/transformers.py", line 5, in <module>
+    from company.utils.legacy_helper import parse_legacy_format
+ModuleNotFoundError: No module named 'company.utils.legacy_helper'
+[2026-03-15 06:00:02,450] {dagbag.py:350} ERROR - Broken DAG: [/opt/airflow/dags/etl_sales_curated_daily.py]
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/dagbag.py", line 531, in parse
+    loader.exec_module(new_module)
+ModuleNotFoundError: No module named 'company.utils.legacy_helper'
+Error when trying to load the DAG: ModuleNotFoundError: No module named 'company.utils.legacy_helper'
