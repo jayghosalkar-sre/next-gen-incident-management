@@ -1,0 +1,9 @@
+25/03/15 14:22:18 ERROR YarnScheduler: Lost executor 3 on ip-10-0-1-45.ec2.internal: 
+Container from a bad node: container_1742043738000_0001_01_000004 on host: ip-10-0-1-45.ec2.internal. 
+Exit status: 143. Diagnostics: Container killed by YARN for exceeding memory limits. 
+10.2 GB of 10 GB physical memory used. 
+Consider boosting spark.yarn.executor.memoryOverhead or spark.executor.memory.
+25/03/15 14:22:18 WARN TaskSetManager: Lost task 14.0 in stage 2.0 (TID 87, ip-10-0-1-45.ec2.internal, executor 3): 
+ExecutorLostFailure (executor 3 exited caused by one of the running tasks) 
+Reason: Container killed by YARN for exceeding memory limits.
+25/03/15 14:22:19 ERROR ApplicationMaster: User class threw exception: org.apache.spark.SparkException: Job aborted due to stage failure
