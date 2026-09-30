@@ -1,0 +1,11 @@
+25/03/15 09:15:42 ERROR HiveClientImpl: Error connecting to metastore
+org.apache.thrift.transport.TTransportException: java.net.ConnectException: Connection refused (Connection refused)
+	at org.apache.thrift.transport.TSocket.open(TSocket.java:226)
+	at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:500)
+	at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.<init>(HiveMetaStoreClient.java:250)
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+25/03/15 09:15:42 ERROR ApplicationMaster: User class threw exception: 
+MetaException(message:Could not connect to meta store using any of the URIs provided. Most recent failure: 
+org.apache.thrift.transport.TTransportException: java.net.ConnectException: Connection refused)
