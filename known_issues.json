@@ -1,0 +1,243 @@
+[
+  {
+    "id": "oom-001",
+    "source": "emr",
+    "error_signature": "Container killed by YARN for exceeding memory limits",
+    "keywords": [
+      "exceeding memory limits",
+      "Container killed by YARN for exceeding memory limits",
+      "OutOfMemoryError",
+      "Java heap space",
+      "physical memory used",
+      "spark.yarn.executor.memoryOverhead"
+    ],
+    "category": "resource_exhaustion",
+    "specialist_needed": "none",
+    "can_auto_retry": true,
+    "action_taken": "Increase spark.executor.memory to 8g (or higher) and re-run the job. Also consider increasing spark.executor.memoryOverhead.",
+    "urgency": 2
+  },
+  {
+    "id": "conn-014",
+    "source": "emr",
+    "error_signature": "Unable to connect to metastore or Connection refused",
+    "keywords": [
+      "Connection refused",
+      "metastore",
+      "Unable to connect",
+      "Connection timed out",
+      "Could not connect to the endpoint"
+    ],
+    "category": "connectivity",
+    "specialist_needed": "none",
+    "can_auto_retry": true,
+    "action_taken": "Retry the job after 5-10 minutes. Check if the metastore or external service is temporarily unavailable.",
+    "urgency": 1
+  },
+  {
+    "id": "code-027",
+    "source": "emr",
+    "error_signature": "NullPointerException in application code",
+    "keywords": [
+      "NullPointerException",
+      "java.lang.NullPointerException",
+      "NoneType",
+      "AttributeError"
+    ],
+    "category": "code_bug",
+    "specialist_needed": "data_engineer",
+    "can_auto_retry": false,
+    "action_taken": "Investigate the stack trace, fix the null handling in the application code, and redeploy the job.",
+    "urgency": 3
+  },
+  {
+    "id": "disk-009",
+    "source": "emr",
+    "error_signature": "No space left on device or disk full",
+    "keywords": [
+      "No space left on device",
+      "disk full",
+      "Not enough space",
+      "OSError: [Errno 28]"
+    ],
+    "category": "resource_exhaustion",
+    "specialist_needed": "platform_sre",
+    "can_auto_retry": false,
+    "action_taken": "Clean up temporary files or increase disk size on the cluster nodes. Check yarn.nodemanager.local-dirs usage.",
+    "urgency": 4
+  },
+  {
+    "id": "shuffle-033",
+    "source": "emr",
+    "error_signature": "Shuffle fetch failed or Executor lost",
+    "keywords": [
+      "Shuffle Fetch Failed",
+      "FetchFailedException",
+      "org.apache.spark.shuffle.FetchFailedException"
+    ],
+    "category": "resource_exhaustion",
+    "specialist_needed": "none",
+    "can_auto_retry": true,
+    "action_taken": "Increase spark.shuffle.memoryFraction or spark.executor.memory. Consider reducing the number of partitions if data skew is present. Retry the job.",
+    "urgency": 2
+  },
+  {
+    "id": "s3-timeout-012",
+    "source": "emr",
+    "error_signature": "S3 timeout or slow down",
+    "keywords": [
+      "SlowDown",
+      "s3a",
+      "AmazonS3Exception",
+      "Status Code: 503",
+      "Please reduce your request rate"
+    ],
+    "category": "connectivity",
+    "specialist_needed": "none",
+    "can_auto_retry": true,
+    "action_taken": "Add retry logic or increase fs.s3a.attempts.maximum. Retry the job after a short delay.",
+    "urgency": 1
+  },
+  {
+    "id": "af-timeout-001",
+    "source": "airflow",
+    "error_signature": "Task exceeded timeout or execution_timeout",
+    "keywords": [
+      "Timeout",
+      "execution_timeout",
+      "Task timed out",
+      "AirflowTaskTimeout",
+      "DagRun timed out",
+      "dagrun_timeout"
+    ],
+    "category": "timeout",
+    "specialist_needed": "none",
+    "can_auto_retry": true,
+    "action_taken": "Increase task execution_timeout or optimize the task. If transient, clear and retry the task.",
+    "urgency": 2
+  },
+  {
+    "id": "af-sensor-002",
+    "source": "airflow",
+    "error_signature": "Sensor timed out waiting for condition",
+    "keywords": [
+      "Sensor has timed out",
+      "Poke returned False",
+      "Soft time limit exceeded",
+      "AirflowSensorTimeout",
+      "reschedule mode",
+      "sensor timed out"
+    ],
+    "category": "timeout",
+    "specialist_needed": "none",
+    "can_auto_retry": true,
+    "action_taken": "Check if the upstream data/file arrived late. Increase sensor timeout/poke_interval or switch to reschedule mode. Clear and retry if data is now available.",
+    "urgency": 2
+  },
+  {
+    "id": "af-upstream-003",
+    "source": "airflow",
+    "error_signature": "Upstream task failed or upstream_failed state",
+    "keywords": [
+      "upstream_failed",
+      "Upstream task",
+      "depends_on_past",
+      "Trigger rule",
+      "all_success"
+    ],
+    "category": "dependency",
+    "specialist_needed": "none",
+    "can_auto_retry": false,
+    "action_taken": "Fix or clear the failed upstream task first. Then clear this task so it can run.",
+    "urgency": 2
+  },
+  {
+    "id": "af-import-004",
+    "source": "airflow",
+    "error_signature": "DAG import error or broken DAG",
+    "keywords": [
+      "Broken DAG",
+      "ImportError",
+      "ModuleNotFoundError",
+      "DagBagImportException",
+      "Error when trying to load the DAG",
+      "cannot import name"
+    ],
+    "category": "code_bug",
+    "specialist_needed": "data_engineer",
+    "can_auto_retry": false,
+    "action_taken": "Fix the Python import/syntax error in the DAG file and redeploy. Check Airflow UI > Browse > DAG Import Errors.",
+    "urgency": 3
+  },
+  {
+    "id": "af-db-005",
+    "source": "airflow",
+    "error_signature": "Airflow metadata DB connection failure",
+    "keywords": [
+      "OperationalError",
+      "could not connect to server",
+      "connection to server at",
+      "FATAL:  password authentication failed",
+      "sqlalchemy.exc",
+      "airflow.exceptions.AirflowException: Could not create Connexion"
+    ],
+    "category": "connectivity",
+    "specialist_needed": "platform_sre",
+    "can_auto_retry": true,
+    "action_taken": "Check Airflow metadata DB (Postgres/MySQL) health, credentials, and network. Restart scheduler/webserver if needed after DB is healthy.",
+    "urgency": 4
+  },
+  {
+    "id": "af-s3-perm-006",
+    "source": "airflow",
+    "error_signature": "S3 access denied or permission error from Airflow task",
+    "keywords": [
+      "AccessDenied",
+      "403 Forbidden",
+      "An error occurred (AccessDenied)",
+      "Unable to locate credentials",
+      "NoCredentialsError",
+      "botocore.exceptions.ClientError"
+    ],
+    "category": "config_error",
+    "specialist_needed": "platform_sre",
+    "can_auto_retry": false,
+    "action_taken": "Fix IAM role/policy or Airflow connection credentials for S3. Verify the task's AWS connection and bucket policy.",
+    "urgency": 3
+  },
+  {
+    "id": "af-pod-007",
+    "source": "airflow",
+    "error_signature": "Kubernetes pod failure or OOMKilled",
+    "keywords": [
+      "OOMKilled",
+      "Pod failed",
+      "UnexpectedAdmissionError",
+      "Failed to create pod",
+      "KubernetesExecutor",
+      "pod has been deleted"
+    ],
+    "category": "resource_exhaustion",
+    "specialist_needed": "platform_sre",
+    "can_auto_retry": true,
+    "action_taken": "Increase task memory/CPU requests/limits in the pod template or operator. Clear and retry the task after adjusting resources.",
+    "urgency": 3
+  },
+  {
+    "id": "af-conn-008",
+    "source": "airflow",
+    "error_signature": "Airflow connection not found or invalid",
+    "keywords": [
+      "The conn_id",
+      "is not defined",
+      "Connection not found",
+      "airflow.exceptions.AirflowNotFoundException",
+      "Could not find connection"
+    ],
+    "category": "config_error",
+    "specialist_needed": "data_engineer",
+    "can_auto_retry": false,
+    "action_taken": "Create or fix the Airflow Connection (Admin > Connections) with the correct conn_id used by the task.",
+    "urgency": 3
+  }
+]
