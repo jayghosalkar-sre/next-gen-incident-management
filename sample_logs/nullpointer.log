@@ -1,0 +1,13 @@
+25/03/15 16:45:11 ERROR Executor: Exception in task 7.0 in stage 5.0 (TID 142)
+java.lang.NullPointerException
+	at com.company.etl.Transform.processRecord(Transform.java:87)
+	at com.company.etl.Transform.$anonfun$call$1(Transform.java:45)
+	at scala.collection.Iterator$$anon$10.next(Iterator.scala:459)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage2.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+25/03/15 16:45:11 WARN TaskSetManager: Lost task 7.0 in stage 5.0 (TID 142, ip-10-0-2-18.ec2.internal, executor 2): 
+java.lang.NullPointerException
+	at com.company.etl.Transform.processRecord(Transform.java:87)
+25/03/15 16:45:12 ERROR ApplicationMaster: User class threw exception: org.apache.spark.SparkException: Job aborted due to stage failure: 
+Task 7 in stage 5.0 failed 4 times, most recent failure: Lost task 7.3 in stage 5.0 (TID 155, ip-10-0-2-18.ec2.internal, executor 2): 
+java.lang.NullPointerException
